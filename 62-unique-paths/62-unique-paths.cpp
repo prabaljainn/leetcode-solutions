@@ -13,11 +13,10 @@ class Solution
         if (i == m - 1 and j == n - 1)
             return 1;
         int ans = 0;
-        
+
         if (dp[i][j] != -1)
             return dp[i][j];
-        
-        
+
         ans += rec(i + 1, j);
         ans += rec(i, j + 1);
 
@@ -37,6 +36,5 @@ class Solution
         }
 
         return rec(0, 0);
-
     }
 };
