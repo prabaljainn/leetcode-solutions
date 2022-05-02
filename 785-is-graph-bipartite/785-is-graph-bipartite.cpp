@@ -1,29 +1,40 @@
-class Solution {
-public:
-     bool isBipartite(vector<vector<int>>& graph) {
-    int n = graph.size();
-    vector<int> color(n); // 0: uncolored; 1: color A; -1: color B
-        
-    queue<int> q; // queue, resusable for BFS    
-	
-    for (int i = 0; i < n; i++) {
-      if (color[i]) continue; // skip already colored nodes
-      
-      // BFS with seed node i to color neighbors with opposite color
-      color[i] = 1; // color seed i to be A (doesn't matter A or B) 
-      for (q.push(i); !q.empty(); q.pop()) {
-        int cur = q.front();
-        for (int neighbor : graph[cur]) 
-		{
-          if (!color[neighbor]) // if uncolored, color with opposite color
-          { color[neighbor] = -color[cur]; q.push(neighbor); } 
-		  
-          else if (color[neighbor] == color[cur]) 
-            return false; // if already colored with same color, can't be bipartite!
-        }        
-      }
+class Solution
+{
+    public:
+
+        int color[109];	//0 if non vis 1 and 2
+    int n;
+   	// bool vis[109];
+
+    bool flag = false;
+
+    void dfs(int node, vector<vector < int>> &g, int clr)
+    {
+        color[node] = clr;
+
+        for (int elem: g[node])
+        {
+            if (color[elem] == -1)
+                dfs(elem, g, 1 - clr);
+            else if (color[elem] == clr)
+            {
+                flag = true;
+                break;
+            }
+        }
     }
-    
-    return true;
-  }
+    bool isBipartite(vector<vector < int>> &graph)
+    {
+        n = graph.size();
+        for (int i = 0; i < n; i++)
+            color[i] = -1;
+
+        for (int i = 0; i < n; i++)
+        {
+            if (color[i] == -1)
+                dfs(i, graph, 0);
+
+        }
+        return !flag;
+    }
 };
