@@ -8,21 +8,25 @@ public:
 };
 */
 
-class Solution {
-public:
-    int getImportance(vector<Employee*> employees, int id) {
-        
-        int ans = 0;
-        
-        for(auto node: employees){
-            if(node->id==id){
-                ans+=node->importance;
-                for(int subs: node->subordinates){
-                    ans+= getImportance(employees, subs);
+class Solution
+{
+    public:
+        int getImportance(vector<Employee*> employees, int id)
+        {
+
+            int ans = 0;
+
+            for (auto node: employees)
+            {
+                if (node->id == id)
+                {
+                    ans += node->importance;
+                    for (int subs: node->subordinates)
+                    {
+                        ans += getImportance(employees, subs);
+                    }
                 }
             }
+            return ans;
         }
-        return ans;
-        
-    }
 };
