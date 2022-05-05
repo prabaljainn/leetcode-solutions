@@ -9,9 +9,9 @@ class Solution
     int id = 1;
     bool check(int x, int y, vector<vector < char>> &arr)
     {
-
         if (x < n and x>=0 and y>=0 and y < m and arr[x][y] == '1' and color[x][y]==0)
             return true;
+        
         return false;
     }
     void dfs(int x, int y, vector<vector < char>> &grid) {
