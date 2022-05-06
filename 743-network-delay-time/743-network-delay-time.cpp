@@ -2,9 +2,15 @@ class Solution
 {
     public:
         int inf = 1e9;
-
-    int networkDelayTime(vector<vector < int>> &g, int n, int k)
+    vector<vector<pair<int, int>>> g;
+    int networkDelayTime(vector<vector < int>> &graph, int n, int k)
     {
+        g.resize(n + 1);
+        for (auto elem: graph)
+        {
+            g[elem[0]].push_back(make_pair(elem[1], elem[2]));
+        }
+
         int dis[n + 1];
         bool vis[n + 1];
         for (int i = 1; i <= n; i++)
@@ -27,23 +33,25 @@ class Solution
                 continue;
             vis[node] = true;
 
-            for (auto vec: g)
+            for (auto vec: g[node])
             {
-                if (vec[0] == node)
-                {
-                    if (dis[vec[1]] > distance + vec[2])
+                        int curr = vec.first;
+                int duuri = vec.second;
+                
+                    if (dis[curr] > distance + duuri)
                     {
-                        dis[vec[1]] = distance + vec[2];
-                        pq.push(make_pair(-dis[vec[1]], vec[1]));
+                        dis[curr] = distance + duuri;
+                        pq.push(make_pair(-dis[curr], curr));
                     }
-                }
+            
             }
         }
-        int ans =0;
-        for (int i = 1; i <= n; i++) {
+        int ans = 0;
+        for (int i = 1; i <= n; i++)
+        {
             ans = max(ans, dis[i]);
         }
-        if(ans ==inf)
+        if (ans == inf)
             return -1;
         return ans;
     }
