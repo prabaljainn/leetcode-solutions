@@ -5,7 +5,7 @@ class Solution
     bool vis[22];
     map<string, bool> m;
     string s;
-    bool rec(int level, vector<string> &wordDict)
+    bool rec(int level)
     {
         int n = s.size();
         if (level == n)
@@ -15,13 +15,13 @@ class Solution
         vis[level] = true;
         for (int i = level; i < n; i++)
         {
-            if (find(wordDict.begin(), wordDict.end(), s.substr(level, i - level + 1)) != wordDict.end() and rec(i + 1, wordDict) == true)
+            if (m[s.substr(level, i - level + 1)]== true and rec(i + 1) == true)
                 dp[level] = true;
         }
         return dp[level];
     }
     vector<string> ans;
-    void rec2(int level, string str, vector<string> &wordDict)
+    void rec2(int level, string str)
     {
         int n = s.size();
         if (level == s.size())
@@ -29,12 +29,12 @@ class Solution
 
         for (int i = level; i < n; i++)
         {
-            if (find(wordDict.begin(), wordDict.end(), s.substr(level, i - level + 1)) != wordDict.end() and rec(i + 1, wordDict) == true)
+            if (m[s.substr(level, i - level + 1)]== true and rec(i + 1) == true)
             {
                 string temp = str;
                 if(level>0)str+= " ";
                 str += s.substr(level, i - level + 1);
-                rec2(i + 1, str, wordDict);
+                rec2(i + 1, str);
                 str = temp;
                 
             }
@@ -44,10 +44,12 @@ class Solution
     vector<string> wordBreak(string S, vector<string> &wordDict)
     {
         memset(vis, false, sizeof(vis));
-
+        
+        for(auto x: wordDict)
+            m[x] = true;
         s = S;
        	// cout<<(rec(0,wordDict));
-        rec2(0, "", wordDict);
+        rec2(0, "");
 
         return ans;
     }
