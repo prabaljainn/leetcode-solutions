@@ -34,7 +34,7 @@ public:
             return -1;
         //ans is sure
         
-        int hi  = 0;
+        int hi  = -1e9;
         for(int x: arr)
             hi  = max(hi, x);
         int ans = hi;
