@@ -1,8 +1,8 @@
 class Solution {
 public:
     int n,m,k;
-    vector<int> arr;
-    bool check (int day){   // this returns me if we can make m bouq
+    
+    bool check (int day,vector<int>& arr){   // this returns me if we can make m bouq
         int count = 0; 
         int val  =0;
         for(int x: arr)
@@ -24,9 +24,9 @@ public:
     }
     int minDays(vector<int>& bloomDay, int M, int K) {
         int lo = 1;
-        arr = bloomDay;
         
-        n = arr.size();
+        
+        n = bloomDay.size();
         m = M;
         k = K;
         
@@ -35,12 +35,12 @@ public:
         //ans is sure
         
         int hi  = -1e9;
-        for(int x: arr)
+        for(int x: bloomDay)
             hi  = max(hi, x);
         int ans = hi;
         while(lo<= hi){
             int mid = lo+ (hi-lo)/2;
-            if(check(mid)==true)
+            if(check(mid,bloomDay)==true)
             {
                 hi = mid-1;
                 ans = mid;
