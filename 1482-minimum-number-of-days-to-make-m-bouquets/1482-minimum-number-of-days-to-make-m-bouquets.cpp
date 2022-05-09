@@ -17,7 +17,10 @@ public:
                 count=0;
             }
         }
-        return val>=m;
+        if(val>=m)
+            return true;
+        else return false;
+        
     }
     int minDays(vector<int>& bloomDay, int M, int K) {
         int lo = 1;
