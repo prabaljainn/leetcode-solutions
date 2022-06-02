@@ -4,12 +4,12 @@ class Solution
         int n;
     int solve(string s, char x)
     {
-        // cout<<s<<" ";
+       	// cout<<s<<" ";
         int ones = 0;
         int arr[n];
         for (int i = 0; i < n; i++)
         {
-            
+
             if (s[i] == x)
             {
                 arr[i] = 1;
@@ -19,9 +19,9 @@ class Solution
             {
                 arr[i] = 0;
             }
-            // cout<<arr[i]<<" ";
+           	// cout<<arr[i]<<" ";
         }
-        
+
         int left[n];
         int right[n];
         for (int i = 0; i < n; i++)
@@ -51,19 +51,21 @@ class Solution
             }
         }
         int ans = 0;
-        if(n==ones)
+        if (n == ones)
             return n;
         for (int i = 1; i < n - 1; i++)
         {
-            int summ = left[i - 1] + right[i + 1];
-            if (summ == ones)
-            {
-                ans = max(ans, summ);
-            }
-            else
-            {
-                ans = max(ans, summ + 1);
-            }
+            
+                int summ = left[i - 1] + right[i + 1];
+                if (summ == ones)
+                {
+                    ans = max(ans, summ);
+                }
+                else
+                {
+                    ans = max(ans, summ + 1);
+                }
+            
         }
         return ans;
     }
@@ -75,7 +77,7 @@ class Solution
         {
             ans = max(ans, solve(text, 'a' + i));
         }
-        
+
         return ans;
     }
 };
