@@ -2,10 +2,8 @@ class Solution
 {
     public:
         int n;
-    // bool vis[400][400];
-    int dp[400][400];
+    int dp[201][201];
     int rec(vector<vector < int>> &triangle, int level, int idx)
-    
     {
        	//returns the best you can make on level taking index idx
         if (level == n)
@@ -14,8 +12,6 @@ class Solution
             return 1e9;
         if (dp[level][idx] != -1)
             return dp[level][idx];
-
-        // vis[level][idx] = true;
 
         int ans = triangle[level][idx];
 
