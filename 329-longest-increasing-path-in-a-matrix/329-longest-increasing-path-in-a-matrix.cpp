@@ -1,8 +1,10 @@
 
 class Solution {
 public:
-    int n, m;vector<vector<int>> arr;
-    int dp[201][201];
+    int n, m;
+    // vector<vector<int>> arr;
+    // vector<vector<int>> dp;
+    // int dp[201][201];
     int dx[4]{0,0,-1,1};
     int dy[4]{-1,1,0,0};
     bool check(int x, int y){
@@ -11,7 +13,7 @@ public:
         return false;
     }
     
-    int rec(int x, int y) //returns the longest inc path starting at (x,y)
+    int rec(int x, int y, vector<vector<int>>& dp,vector<vector<int>>& arr) //returns the longest inc path starting at (x,y)
     {
         if(dp[x][y]!=-1)
             return dp[x][y];
@@ -22,7 +24,7 @@ public:
             int yt = y+dy[i];
             if(check(xt,yt) and arr[xt][yt] > arr[x][y] )
             {
-                ans = max(ans, rec(xt,yt));
+                ans = max(ans, (rec(xt,yt,dp,arr)) );
                 
             }
         }
@@ -31,15 +33,25 @@ public:
     }
     
     int longestIncreasingPath(vector<vector<int>>& matrix) {
-        arr = matrix;
-        memset(dp,-1,sizeof(dp));
+
         n = matrix.size();
         m = matrix[0].size();
         int ans =0;
+        vector<vector<int>> dp = matrix;
+                for(int i=0; i<n; i++){
+            for(int j=0; j<m; j++){
+                // cout<<rec(i,j)<<" ";
+         dp[i][j] = -1;
+            }
+            // cout<<endl;
+        }
+        
+        
+        
         for(int i=0; i<n; i++){
             for(int j=0; j<m; j++){
                 // cout<<rec(i,j)<<" ";
-               ans = max(ans, rec(i,j));
+               ans = max(ans, rec(i,j,dp,matrix));
             }
             // cout<<endl;
         }
