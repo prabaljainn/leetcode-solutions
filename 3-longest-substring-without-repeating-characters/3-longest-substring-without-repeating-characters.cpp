@@ -1,7 +1,14 @@
 class Solution {
 public:
+    
+    Solution()
+    {
+        std::ios::sync_with_stdio(false);
+        std::cin.tie(nullptr);
+    }
     int lengthOfLongestSubstring(string s) {
 
+        
         int n= s.size();
         int head = -1; int tail = 0;
         //len is head-tail +1;
