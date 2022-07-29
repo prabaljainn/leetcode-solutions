@@ -4,7 +4,7 @@ class Solution
         
     bool validPath(int n, vector<vector < int>> &edges, int source, int destination)
     {
-        map<int,vector<int>> g;
+        unordered_map<int,vector<int>> g;
 
        	// g.resize(edges.size());
         if (n == 1)
