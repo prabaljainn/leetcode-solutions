@@ -36,10 +36,8 @@ class Solution
         Parent.resize(n);
         Rank.assign(n, 1);
         iota(Parent.begin(),Parent.end(),0);
-        // for (int i = 0; i < n; i++)
-        //     Parent[i] = i;
-        
-        for (vector < int> x : edges)
+   
+        for (const auto &x : edges)
         {
             Merge(x[0], x[1]);
         }
