@@ -35,9 +35,9 @@ class Solution
     {
         Parent.resize(n);
         Rank.assign(n, 1);
-
-        for (int i = 0; i < n; i++)
-            Parent[i] = i;
+        iota(Parent.begin(),Parent.end(),0);
+        // for (int i = 0; i < n; i++)
+        //     Parent[i] = i;
         
         for (vector < int> x : edges)
         {
