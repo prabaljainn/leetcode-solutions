@@ -1,42 +1,49 @@
 class Solution
 {
     public:
+        vector<int> Rank;
+    vector<int> Parent;
 
-        bool validPath(int n, vector<vector < int>> &edges, int source, int destination)
+    int findParent(int x)
+    {
+        if (Parent[x] == x)
+            return x;
+        
+        return Parent[x] = findParent(Parent[x]);
+    }
+    
+    void Merge(int x, int y)
+    {
+        int xa = findParent(x);
+        int xb = findParent(y);
+        if(xa==xb)
+            return;
+        
+        if(Rank[xa] > Rank[xb])
         {
-            vector<vector<int>>g(n+1);
-
-           	// g.resize(edges.size());
-            if (n == 1)
-                return true;
-
-            for (auto x: edges)
-            {
-                g[x[0]].push_back(x[1]);
-                g[x[1]].push_back(x[0]);
-            }
-
-            bool vis[n];
-            memset(vis, false, n);
-
-            stack<int> s;
-            s.push(source);
-
-            while (!s.empty())
-            {
-                int elem = s.top();
-                s.pop();
-                vis[elem] = true;
-                if (elem == destination)
-                    return 1;
-
-                for (auto x: g[elem])
-                {
-
-                    if (vis[x] == false)
-                        s.push(x);
-                }
-            }
-            return false;
+            Rank[xa]+=Rank[xb];
+                Parent[findParent(y)] = xa;
         }
+        else{
+            Rank[xb]+=Rank[xa];
+            Parent[findParent(x)] = xb;
+            
+        }
+    }
+    
+    bool validPath(int n, vector<vector < int>> &edges, int source, int destination)
+    {
+        Parent.resize(n);
+        Rank.assign(n, 1);
+
+        for (int i = 0; i < n; i++)
+            Parent[i] = i;
+        
+        for (vector < int> x : edges)
+        {
+            Merge(x[0], x[1]);
+        }
+
+        return findParent(source) == findParent(destination);
+    }
 };
