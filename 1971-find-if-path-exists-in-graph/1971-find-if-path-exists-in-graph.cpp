@@ -37,7 +37,7 @@ class Solution
         Rank.assign(n, 1);
         iota(Parent.begin(),Parent.end(),0);
    
-        for (const auto &x : edges)
+        for (const vector < int> &x : edges)
         {
             Merge(x[0], x[1]);
         }
