@@ -13,7 +13,7 @@ class Solution
 {
     public:
         int n;
-    map<int, int> hash;
+    unordered_map<int, int> hash;
     vector<int> preorder, inorder;
     TreeNode* recovery(int Lin, int Rin, int Lpre, int Rpre)
     {
