@@ -11,10 +11,10 @@
  */
 class Solution {
 public:
-    TreeNode* help(vector<int> arr, int l, int r){
+    TreeNode* help(vector<int>& arr, int l, int r){
         if(l>r)
             return NULL;
-        int mid = l+ (r-l)/2;
+        int mid = (l+r)/2;
         TreeNode *root = new TreeNode(arr[mid]);
         
         root->right = help(arr, mid+1, r);
