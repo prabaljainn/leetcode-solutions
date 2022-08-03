@@ -20,18 +20,12 @@ class MyCalendar
         auto curr = s.lower_bound({ start, -1e9 });
         auto prev = curr;
         prev--;
-int l = (*prev).second;
-        int r = (*curr).first;
-
-        if (start>=l and end<=r)
+        if (start>=(*prev).second and end<=(*curr).first)
         {
             s.insert({ start,
                 end });
             return true;
         }
-        cout<<start<<"    "<<end<<endl;
-        cout<<l<<endl;
-        cout<<r<<endl;
         
         return false;
     }
