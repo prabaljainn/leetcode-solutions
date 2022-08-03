@@ -1,8 +1,8 @@
 class Solution {
 public:
     char repeatedCharacter(string s) {
-        int arr[26];
-        memset(arr, 0, sizeof(arr));
+        int arr[26]={0};
+        // memset(arr, 0, sizeof(arr));
         
         for(char x: s)
         {
