@@ -21,7 +21,6 @@ class Solution {
 public:
     int combinationSum4(vector<int>& nums, int target) {
         n = nums.size();
-        arr.resize(nums.size());
         arr = nums;
         memset(dp,-1,sizeof(dp));
         return rec(target);
