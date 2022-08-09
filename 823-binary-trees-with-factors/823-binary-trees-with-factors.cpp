@@ -3,8 +3,8 @@ class Solution
     public:
         int mod = 1e9 + 7;
     vector<int> arr;
-    long long dp[1002];
-    long long n;
+    int dp[1002];
+    int n;
     long long rec(int level)
     {
         if (level == 0)
