@@ -1,9 +1,9 @@
 class Solution
 {
     public:
-    int mod  = 1e9+7;
-        vector<int> arr;
-    long long dp[100100];
+        int mod = 1e9 + 7;
+    vector<int> arr;
+    long long dp[1002];
     long long n;
     long long rec(int level)
     {
@@ -12,20 +12,20 @@ class Solution
 
         if (dp[level] != -1)
             return dp[level];
-        
+
         long long ans = 1;
 
         long long i = 0;
         long long j = level - 1;
         while (i <= j)
         {
-            long long mul = (1LL*arr[i] * arr[j]);
-            if ( mul == arr[level])
+            long long mul = (1LL *arr[i] *arr[j]);
+            if (mul == arr[level])
             {
                 if (i == j)
-                    ans += (rec(i)*rec(i))%mod;
+                    ans += (rec(i) *rec(i)) % mod;
                 else
-                    ans += 2 *(rec(i) *rec(j))%mod;
+                    ans += 2 *(rec(i) *rec(j)) % mod;
                 i++;
                 j--;
             }
@@ -35,7 +35,7 @@ class Solution
                 i++;
         }
 
-        return dp[level] = (int)(ans%mod);
+        return dp[level] = (int)(ans % mod);
     }
 
     int numFactoredBinaryTrees(vector<int> &arr)
@@ -48,6 +48,6 @@ class Solution
         for (int i = 0; i < n; i++)
             sum += rec(i);
 
-        return sum%mod;
+        return sum % mod;
     }
 };
