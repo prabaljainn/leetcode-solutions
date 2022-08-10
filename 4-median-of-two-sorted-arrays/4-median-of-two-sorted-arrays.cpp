@@ -1,36 +1,39 @@
 class Solution {
 public:
-    double findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2)
-    {
-        int M = nums1.size(), N = nums2.size();
 
-        /* Why?? */
-        if (M > N)
-            return findMedianSortedArrays(nums2, nums1);
+double findMedianSortedArrays(vector<int> &arr1, vector<int> &arr2) {
+    int m  = arr1.size();
+    int n = arr2.size();
+    if(m > n)
+        return findMedianSortedArrays(arr2, arr1);
+    int halflen = (n + m + 1) / 2;
+    int lo = 0;
+    int hi = m;
+    while(lo <= hi) {
+        int parx = (hi + lo) / 2;
+        int pary = halflen - parx;
 
-        int l = 0, r = M;
-        while (l <= r) {
-            int mid1 = ((size_t)l + r) / 2;
-            int mid2 = (M + N + 1) / 2 - mid1;
+        int a1 = parx == 0 ? -1e9 : arr1[parx - 1];
+        int a2 = parx == m ? +1e9 : arr1[parx];
+        int b1 = pary == 0 ? -1e9 : arr2[pary - 1];
+        int b2 = pary == n ? +1e9 : arr2[pary];
 
-            int max1_left = mid1 - 1 >= 0 ? nums1[mid1 - 1] : INT_MIN;
-            int max2_left = mid2 - 1 >= 0 ? nums2[mid2 - 1] : INT_MIN;
+        if(a1 <= b2 and b1 <= a2) {
+                double v1 = max(a1, b1);
+                double v2 = min(a2, b2);
+            if((m + n) % 2 == 0) {
 
-            int min1_right = mid1 < M ? nums1[mid1] : INT_MAX;
-            int min2_right = mid2 < N ? nums2[mid2] : INT_MAX;
-
-            if (max1_left <= min2_right && max2_left <= min1_right) {
-                int max_left = max(max1_left, max2_left);
-                int min_right = min(min1_right, min2_right);
-                return (M + N) % 2 ? max_left : (max_left + min_right) / 2.0;
-            }
-
-            if (max2_left > min1_right) {
-                l = mid1 + 1;
+                return (v1 + v2) / 2;
             } else {
-                r = mid1 - 1;
+                return max(a1, b1);
             }
+        } else if(a1 > b2) {
+            hi = parx - 1;
+        } else {
+            lo = parx + 1;
         }
-        return -1;
     }
+    return 1.0;
+}
+
 };
