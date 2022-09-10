@@ -1,7 +1,7 @@
 class Solution {
 public:
     vector<int> intersection(vector<int>& arr1, vector<int>& arr2) {
-        set<int> s(arr1.begin(), arr1.end());
+        unordered_set<int> s(arr1.begin(), arr1.end());
         vector<int> ans;
         ans.reserve(min(arr1.size(), arr2.size()));
         
