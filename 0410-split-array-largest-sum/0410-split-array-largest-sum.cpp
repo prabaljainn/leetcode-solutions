@@ -2,8 +2,8 @@ class Solution
 {
     public:
         int k;
-    vector<int> arr;
-    bool check(int mid)
+
+    bool check(int mid, vector<int> &arr, int k)
     {
         int val = 1;
         int sum = 0;
@@ -25,8 +25,7 @@ class Solution
     }
     int splitArray(vector<int> &nums, int k)
     {
-        this->k = k;
-        arr = nums;
+
         int lo = 0;
         int hi = 0;
         for (int x: nums)
@@ -36,7 +35,7 @@ class Solution
         while (lo <= hi)
         {
             int mid = lo + (hi - lo) / 2;
-            if (check(mid))
+            if (check(mid, nums, k))
             {
                 ans = mid;
                 hi = mid - 1;
