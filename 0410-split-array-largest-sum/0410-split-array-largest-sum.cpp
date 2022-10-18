@@ -19,7 +19,7 @@ class Solution
             else
                 sum += arr[i];
         }
-        if(sum>mid)
+        if (sum > mid)
             val++;
         return val <= k;
     }
@@ -31,7 +31,7 @@ class Solution
         int hi = 0;
         for (int x: nums)
             hi = hi += x;
-        
+
         int ans = hi;
         while (lo <= hi)
         {
@@ -44,8 +44,6 @@ class Solution
             else
                 lo = mid + 1;
         }
-        for(int i=0; i<100; i++)
-            cout<<i<<"    "<<check(i)<<endl;
 
         return ans;
     }
